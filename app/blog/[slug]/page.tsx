@@ -1,3 +1,4 @@
+// app/blog/[slug]/page.tsx
 import { client } from "@/sanity/lib/client";
 import { postBySlugQuery, relatedPostsQuery } from "@/sanity/lib/queries";
 import type { PortableTextBlock } from "@portabletext/types";
@@ -22,8 +23,11 @@ interface PostDetail {
   excerpt?: string;
 }
 
-interface Props {
-  params: { slug: string };
+// ✅ Correct typing for Next.js Page Props
+interface BlogPageProps {
+  params: {
+    slug: string;
+  };
 }
 
 // ✅ Safe excerpt extractor
@@ -33,7 +37,7 @@ function extractExcerpt(body?: PortableTextBlock[], length = 150): string {
   const firstBlock = body.find(
     (block): block is PortableTextBlock & { children: { text: string }[] } =>
       "children" in block &&
-      Array.isArray((block as { children?: { text: string }[] }).children)
+      Array.isArray((block as { children?: { text?: string }[] }).children)
   );
 
   const firstChild = (
@@ -45,49 +49,46 @@ function extractExcerpt(body?: PortableTextBlock[], length = 150): string {
 }
 
 // ✅ Generate metadata dynamically for SEO
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  try {
-    const post = await client.fetch<PostDetail | null>(postBySlugQuery, {
-      slug: params.slug,
-    });
+export async function generateMetadata({
+  params,
+}: BlogPageProps): Promise<Metadata> {
+  const post = await client.fetch<PostDetail | null>(postBySlugQuery, {
+    slug: params.slug,
+  });
 
-    if (!post) {
-      return { title: "Post not found | Mipitech Blog" };
-    }
-
-    const description = extractExcerpt(post.body);
-
-    return {
-      title: `${post.title} | Mipitech Blog`,
-      description,
-      alternates: {
-        canonical: `https://mipitech.com.ng/blog/${encodeURIComponent(
-          params.slug.toLowerCase()
-        )}`,
-      },
-      openGraph: {
-        title: post.title,
-        description,
-        images: post.mainImage?.asset?.url
-          ? [{ url: post.mainImage.asset.url }]
-          : [],
-        url: `https://mipitech.com.ng/blog/${params.slug}`,
-        type: "article",
-      },
-      twitter: {
-        card: "summary_large_image",
-        title: post.title,
-        description,
-        images: post.mainImage?.asset?.url ? [post.mainImage.asset.url] : [],
-      },
-    };
-  } catch (error) {
-    console.error("Error generating metadata:", error);
-    return { title: "Mipitech Blog" };
+  if (!post) {
+    return { title: "Post not found | Mipitech Blog" };
   }
+
+  const description = extractExcerpt(post.body);
+
+  return {
+    title: `${post.title} | Mipitech Blog`,
+    description,
+    alternates: {
+      canonical: `https://mipitech.com.ng/blog/${encodeURIComponent(
+        params.slug.toLowerCase()
+      )}`,
+    },
+    openGraph: {
+      title: post.title,
+      description,
+      images: post.mainImage?.asset?.url
+        ? [{ url: post.mainImage.asset.url }]
+        : [],
+      url: `https://mipitech.com.ng/blog/${params.slug}`,
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description,
+      images: post.mainImage?.asset?.url ? [post.mainImage.asset.url] : [],
+    },
+  };
 }
 
-export default async function BlogPostPage({ params }: Props) {
+export default async function BlogPostPage({ params }: BlogPageProps) {
   // ✅ Fetch single post
   const post = await client.fetch<PostDetail | null>(postBySlugQuery, {
     slug: params.slug,
