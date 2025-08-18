@@ -23,9 +23,9 @@ interface PostDetail {
   excerpt?: string;
 }
 
-// ✅ Correct typing for params (Promise-based)
+// ✅ Correct typing for params (not a Promise)
 type BlogPageProps = {
-  params: Promise<{ slug: string }>;
+  params: { slug: string };
 };
 
 function extractExcerpt(body?: PortableTextBlock[], length = 150): string {
@@ -45,11 +45,11 @@ function extractExcerpt(body?: PortableTextBlock[], length = 150): string {
   return text.slice(0, length) || "Blog post on Mipitech";
 }
 
-// ✅ generateMetadata now awaits params
+// ✅ generateMetadata now uses params directly
 export async function generateMetadata({
   params,
 }: BlogPageProps): Promise<Metadata> {
-  const { slug } = await params; // 👈 Await here
+  const { slug } = params; // ✅ no await
   const post = await client.fetch<PostDetail | null>(postBySlugQuery, { slug });
 
   if (!post) {
@@ -84,9 +84,9 @@ export async function generateMetadata({
   };
 }
 
-// ✅ Blog page now also awaits params
+// ✅ Blog page now also uses params directly
 export default async function BlogPostPage({ params }: BlogPageProps) {
-  const { slug } = await params; // 👈 Await here
+  const { slug } = params; // ✅ no await
 
   const post = await client.fetch<PostDetail | null>(postBySlugQuery, { slug });
 
