@@ -23,14 +23,11 @@ interface PostDetail {
   excerpt?: string;
 }
 
-// ✅ Correct typing for Next.js Page Props
-interface BlogPageProps {
-  params: {
-    slug: string;
-  };
-}
+// ✅ Correct typing for params (Promise-based)
+type BlogPageProps = {
+  params: Promise<{ slug: string }>;
+};
 
-// ✅ Safe excerpt extractor
 function extractExcerpt(body?: PortableTextBlock[], length = 150): string {
   if (!body?.length) return "Blog post on Mipitech";
 
@@ -48,13 +45,12 @@ function extractExcerpt(body?: PortableTextBlock[], length = 150): string {
   return text.slice(0, length) || "Blog post on Mipitech";
 }
 
-// ✅ Generate metadata dynamically for SEO
+// ✅ generateMetadata now awaits params
 export async function generateMetadata({
   params,
 }: BlogPageProps): Promise<Metadata> {
-  const post = await client.fetch<PostDetail | null>(postBySlugQuery, {
-    slug: params.slug,
-  });
+  const { slug } = await params; // 👈 Await here
+  const post = await client.fetch<PostDetail | null>(postBySlugQuery, { slug });
 
   if (!post) {
     return { title: "Post not found | Mipitech Blog" };
@@ -67,7 +63,7 @@ export async function generateMetadata({
     description,
     alternates: {
       canonical: `https://mipitech.com.ng/blog/${encodeURIComponent(
-        params.slug.toLowerCase()
+        slug.toLowerCase()
       )}`,
     },
     openGraph: {
@@ -76,7 +72,7 @@ export async function generateMetadata({
       images: post.mainImage?.asset?.url
         ? [{ url: post.mainImage.asset.url }]
         : [],
-      url: `https://mipitech.com.ng/blog/${params.slug}`,
+      url: `https://mipitech.com.ng/blog/${slug}`,
       type: "article",
     },
     twitter: {
@@ -88,37 +84,33 @@ export async function generateMetadata({
   };
 }
 
+// ✅ Blog page now also awaits params
 export default async function BlogPostPage({ params }: BlogPageProps) {
-  // ✅ Fetch single post
-  const post = await client.fetch<PostDetail | null>(postBySlugQuery, {
-    slug: params.slug,
-  });
+  const { slug } = await params; // 👈 Await here
+
+  const post = await client.fetch<PostDetail | null>(postBySlugQuery, { slug });
 
   if (!post) {
     return <p className="p-6 text-center text-gray-500">Post not found</p>;
   }
 
-  // ✅ Extract category IDs for related query
   const categoryIds = post.categories?.map((c) => c._id) || [];
-
-  // ✅ Fetch related posts
   const relatedPosts = await client.fetch<PostDetail[]>(relatedPostsQuery, {
-    slug: params.slug,
+    slug,
     categoryIds,
   });
 
   const description = extractExcerpt(post.body);
 
-  // ✅ JSON-LD structured data for SEO
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
     headline: post.title,
     image: post.mainImage?.asset?.url ?? "",
-    url: `https://mipitech.com.ng/blog/${params.slug}`,
+    url: `https://mipitech.com.ng/blog/${slug}`,
     mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": `https://mipitech.com.ng/blog/${params.slug}`,
+      "@id": `https://mipitech.com.ng/blog/${slug}`,
     },
     author: {
       "@type": "Person",
@@ -139,7 +131,6 @@ export default async function BlogPostPage({ params }: BlogPageProps) {
 
   return (
     <>
-      {/* ✅ Inject JSON-LD for SEO */}
       <Script
         id="blogpost-jsonld"
         type="application/ld+json"
