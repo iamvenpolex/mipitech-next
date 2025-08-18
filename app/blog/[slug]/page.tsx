@@ -46,40 +46,45 @@ function extractExcerpt(body?: PortableTextBlock[], length = 150): string {
 
 // ✅ Generate metadata dynamically for SEO
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const post = await client.fetch<PostDetail | null>(postBySlugQuery, {
-    slug: params.slug,
-  });
+  try {
+    const post = await client.fetch<PostDetail | null>(postBySlugQuery, {
+      slug: params.slug,
+    });
 
-  if (!post) {
-    return { title: "Post not found | Mipitech Blog" };
+    if (!post) {
+      return { title: "Post not found | Mipitech Blog" };
+    }
+
+    const description = extractExcerpt(post.body);
+
+    return {
+      title: `${post.title} | Mipitech Blog`,
+      description,
+      alternates: {
+        canonical: `https://mipitech.com.ng/blog/${encodeURIComponent(
+          params.slug.toLowerCase()
+        )}`,
+      },
+      openGraph: {
+        title: post.title,
+        description,
+        images: post.mainImage?.asset?.url
+          ? [{ url: post.mainImage.asset.url }]
+          : [],
+        url: `https://mipitech.com.ng/blog/${params.slug}`,
+        type: "article",
+      },
+      twitter: {
+        card: "summary_large_image",
+        title: post.title,
+        description,
+        images: post.mainImage?.asset?.url ? [post.mainImage.asset.url] : [],
+      },
+    };
+  } catch (error) {
+    console.error("Error generating metadata:", error);
+    return { title: "Mipitech Blog" };
   }
-
-  const description = extractExcerpt(post.body);
-
-  return {
-    title: `${post.title} | Mipitech Blog`,
-    description,
-    alternates: {
-      canonical: `https://mipitech.com.ng/blog/${encodeURIComponent(
-        params.slug.toLowerCase()
-      )}`,
-    },
-    openGraph: {
-      title: post.title,
-      description,
-      images: post.mainImage?.asset?.url
-        ? [{ url: post.mainImage.asset.url }]
-        : [],
-      url: `https://mipitech.com.ng/blog/${params.slug}`,
-      type: "article",
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: post.title,
-      description,
-      images: post.mainImage?.asset?.url ? [post.mainImage.asset.url] : [],
-    },
-  };
 }
 
 export default async function BlogPostPage({ params }: Props) {
@@ -98,7 +103,7 @@ export default async function BlogPostPage({ params }: Props) {
   // ✅ Fetch related posts
   const relatedPosts = await client.fetch<PostDetail[]>(relatedPostsQuery, {
     slug: params.slug,
-    categoryIds, // 🔥 pass it here to fix error
+    categoryIds,
   });
 
   const description = extractExcerpt(post.body);
