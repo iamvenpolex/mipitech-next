@@ -97,7 +97,9 @@ export default function FAQCTASection() {
       {/* CTA Section */}
       <div className="bg-blue-600 text-white mt-16 py-12 px-4 rounded-xl shadow-lg text-center">
         <h3 className="text-2xl font-semibold mb-3">Still have questions?</h3>
-        <p className="mb-6">Let's chat about your goals and how we can help.</p>
+        <p className="mb-6">
+          Let&apos;s chat about your goals and how we can help.
+        </p>
         <motion.a
           href="/contact"
           whileHover={{ scale: 1.05 }}
