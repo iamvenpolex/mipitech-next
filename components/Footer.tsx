@@ -80,7 +80,8 @@ export default function Footer() {
 
   return (
     <footer className="bg-white text-gray-800 py-10 px-6 md:px-20 border-t border-gray-300">
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
+      {/* Desktop Grid */}
+      <div className="hidden md:grid md:grid-cols-4 gap-10">
         {/* Logo & Motto */}
         <div className="space-y-3">
           <Link href="/" className="block">
@@ -148,6 +149,103 @@ export default function Footer() {
               )
             )}
           </ul>
+        </div>
+
+        {/* Contact Info */}
+        <div>
+          <h4 className="text-blue-600 text-lg font-semibold mb-2 border-b-2 w-fit border-gradient-to-r from-black to-blue-500">
+            Contact
+          </h4>
+          <ul className="space-y-2 text-sm">
+            <li className="flex items-center gap-2">
+              <FaMapMarkerAlt className="text-red-600" />
+              24, Red Block street, Behind University of Ibadan, Ibadan. Oyo
+              State. Nigeria
+            </li>
+            <li className="flex items-center gap-2">
+              <FaPhoneAlt className="text-green-600" />
+              +234 803 264 8367
+            </li>
+            <li className="flex items-center gap-2">
+              <FaEnvelope className="text-yellow-600" />
+              support@mipitech.com.ng
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      {/* Mobile Layout */}
+      <div className="md:hidden space-y-8">
+        {/* Logo & Motto */}
+        <div className="space-y-3 text-center">
+          <Link href="/" className="inline-block">
+            <Image
+              src="/mipitech-logo.png"
+              alt="Mipitech Logo"
+              width={120}
+              height={40}
+            />
+          </Link>
+          <p className="text-sm italic text-gray-600">
+            Your One-Stop Solution For Web Design, SEO, App Development &
+            More...
+          </p>
+        </div>
+
+        {/* Quick Links & Legal side by side */}
+        <div className="grid grid-cols-2 gap-6">
+          {/* Quick Links */}
+          <div>
+            <h4 className="text-blue-600 text-lg font-semibold mb-2 border-b-2 w-fit border-gradient-to-r from-black to-blue-500">
+              Quick Links
+            </h4>
+            <ul className="space-y-1">
+              {quickLinks.map((item) => (
+                <li key={item}>
+                  {item === "Portfolio" ? (
+                    <a
+                      href="#portfolio"
+                      onClick={handlePortfolioClick}
+                      className="hover:text-blue-600 transition-all duration-300 relative inline-block group"
+                    >
+                      {item}
+                      <span className="block h-0.5 bg-blue-500 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300" />
+                    </a>
+                  ) : (
+                    <Link
+                      href={`/${item.toLowerCase()}`}
+                      className="hover:text-blue-600 transition-all duration-300 relative inline-block group"
+                    >
+                      {item}
+                      <span className="block h-0.5 bg-blue-500 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300" />
+                    </Link>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Legal Links */}
+          <div>
+            <h4 className="text-blue-600 text-lg font-semibold mb-2 border-b-2 w-fit border-gradient-to-r from-black to-blue-500">
+              Legal
+            </h4>
+            <ul className="space-y-1">
+              {["Privacy Policy", "Terms and Conditions", "Disclaimer"].map(
+                (item) => (
+                  <li key={item}>
+                    <Link
+                      href={`/${item.toLowerCase().replace(/ /g, "-")}`}
+                      className="hover:text-blue-600 transition-all duration-300 relative inline-block group"
+                    >
+                      {item}
+                      <span className="block h-0.5 bg-blue-500 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300" />
+                    </Link>
+                  </li>
+                )
+              )}
+            </ul>
+          </div>
         </div>
 
         {/* Contact Info */}

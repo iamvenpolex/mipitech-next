@@ -53,7 +53,7 @@ export default function HomePage() {
       {/* ===== HERO SECTION ===== */}
       <section
         className="relative h-screen flex items-center justify-center text-center text-white bg-cover bg-center"
-        style={{ backgroundImage: "url('/mipitech-next.png')" }}
+        style={{ backgroundImage: "url('/mipitech-homeherobg.jpg')" }}
       >
         <div className="absolute inset-0 bg-black/50 z-10" />
 
@@ -91,7 +91,7 @@ export default function HomePage() {
           </motion.div>
         </div>
 
-        <div className="absolute bottom-0 w-full overflow-hidden leading-none">
+        <div className="absolute bottom-0 w-full overflow-hidden leading-none z-20">
           <svg
             viewBox="0 0 1200 150"
             preserveAspectRatio="none"

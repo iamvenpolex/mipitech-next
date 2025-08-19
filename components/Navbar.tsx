@@ -154,7 +154,7 @@ export default function Navbar() {
               </button>
             </div>
 
-            <nav className="flex flex-col gap-4">
+            <nav className="flex flex-col gap-7">
               {navLinks.map((link) =>
                 link.name === "Portfolio" ? (
                   <a
