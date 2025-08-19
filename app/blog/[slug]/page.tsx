@@ -23,10 +23,10 @@ interface PostDetail {
   excerpt?: string;
 }
 
-// ✅ Correct typing for params (not a Promise)
-type BlogPageProps = {
-  params: { slug: string };
-};
+// ✅ Fix: params must be typed as Promise<{ slug: string }>
+interface BlogPageProps {
+  params: Promise<{ slug: string }>;
+}
 
 function extractExcerpt(body?: PortableTextBlock[], length = 150): string {
   if (!body?.length) return "Blog post on Mipitech";
@@ -45,11 +45,19 @@ function extractExcerpt(body?: PortableTextBlock[], length = 150): string {
   return text.slice(0, length) || "Blog post on Mipitech";
 }
 
-// ✅ generateMetadata now uses params directly
+// ✅ Static params for SSG
+export async function generateStaticParams() {
+  const posts = await client.fetch<{ slug: string }[]>(
+    `*[_type == "post"]{ "slug": slug.current }`
+  );
+  return posts.map((post) => ({ slug: post.slug }));
+}
+
+// ✅ Metadata
 export async function generateMetadata({
   params,
 }: BlogPageProps): Promise<Metadata> {
-  const { slug } = params; // ✅ no await
+  const { slug } = await params; // ✅ Await params here
   const post = await client.fetch<PostDetail | null>(postBySlugQuery, { slug });
 
   if (!post) {
@@ -84,9 +92,9 @@ export async function generateMetadata({
   };
 }
 
-// ✅ Blog page now also uses params directly
+// ✅ Page component
 export default async function BlogPostPage({ params }: BlogPageProps) {
-  const { slug } = params; // ✅ no await
+  const { slug } = await params; // ✅ Await params here
 
   const post = await client.fetch<PostDetail | null>(postBySlugQuery, { slug });
 
