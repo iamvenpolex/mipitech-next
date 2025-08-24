@@ -50,11 +50,7 @@ export default function LatestArticles() {
           transition={{ duration: 0.6 }}
           className="text-3xl md:text-4xl font-bold mb-10 relative inline-block"
         >
-          From{" "}
-          <span className="text-blue-500 relative">
-            the Blog
-            <span className="absolute left-0 -bottom-1 w-full h-1 bg-gradient-to-r from-blue-500 to-black rounded"></span>
-          </span>
+          From <span className="text-blue-600 relative">the Blog</span>
         </motion.h2>
 
         {/* Blog cards */}
@@ -84,7 +80,7 @@ export default function LatestArticles() {
                 <div className="mt-auto">
                   <Link
                     href={`/blog/${post.slug.current}`}
-                    className="text-blue-600 hover:underline font-medium"
+                    className="mt-4 inline-block bg-blue-600 text-white w-35 px-4 py-2 rounded hover:bg-blue-700 transition-colors text-center"
                   >
                     Read More →
                   </Link>
@@ -98,7 +94,7 @@ export default function LatestArticles() {
         <div className="mt-10">
           <Link
             href="/blog"
-            className="inline-block bg-blue-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-blue-700 transition"
+            className="inline-block bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold  transition"
           >
             View All Articles
           </Link>

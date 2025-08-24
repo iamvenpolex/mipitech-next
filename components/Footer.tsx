@@ -100,7 +100,7 @@ export default function Footer() {
 
         {/* Quick Links */}
         <div>
-          <h4 className="text-blue-600 text-lg font-semibold mb-2 border-b-2 w-fit border-gradient-to-r from-black to-blue-500">
+          <h4 className="text-blue-600 text-lg font-semibold mb-2 border-b-2 w-fit border-blue-400">
             Quick Links
           </h4>
           <ul className="space-y-1">
@@ -131,7 +131,7 @@ export default function Footer() {
 
         {/* Legal Links */}
         <div>
-          <h4 className="text-blue-600 text-lg font-semibold mb-2 border-b-2 w-fit border-gradient-to-r from-black to-blue-500">
+          <h4 className="text-blue-600 text-lg font-semibold mb-2 border-b-2 w-fit border-blue-400">
             Legal
           </h4>
           <ul className="space-y-1">
@@ -153,7 +153,7 @@ export default function Footer() {
 
         {/* Contact Info */}
         <div>
-          <h4 className="text-blue-600 text-lg font-semibold mb-2 border-b-2 w-fit border-gradient-to-r from-black to-blue-500">
+          <h4 className="text-blue-600 text-lg font-semibold mb-2 border-b-2 w-fit border-blue-400">
             Contact
           </h4>
           <ul className="space-y-2 text-sm">
@@ -196,7 +196,7 @@ export default function Footer() {
         <div className="grid grid-cols-2 gap-6">
           {/* Quick Links */}
           <div>
-            <h4 className="text-blue-600 text-lg font-semibold mb-2 border-b-2 w-fit border-gradient-to-r from-black to-blue-500">
+            <h4 className="text-blue-600 text-lg font-semibold mb-2 border-b-2 w-fit border-blue-400">
               Quick Links
             </h4>
             <ul className="space-y-1">
@@ -227,7 +227,7 @@ export default function Footer() {
 
           {/* Legal Links */}
           <div>
-            <h4 className="text-blue-600 text-lg font-semibold mb-2 border-b-2 w-fit border-gradient-to-r from-black to-blue-500">
+            <h4 className="text-blue-600 text-lg font-semibold mb-2 border-b-2 w-fit border-blue-400">
               Legal
             </h4>
             <ul className="space-y-1">
@@ -250,14 +250,14 @@ export default function Footer() {
 
         {/* Contact Info */}
         <div>
-          <h4 className="text-blue-600 text-lg font-semibold mb-2 border-b-2 w-fit border-gradient-to-r from-black to-blue-500">
+          <h4 className="text-blue-600 text-lg font-semibold mb-2 border-b-2 w-fit border-blue-400">
             Contact
           </h4>
           <ul className="space-y-2 text-sm">
             <li className="flex items-center gap-2">
               <FaMapMarkerAlt className="text-red-600" />
               24, Red Block street, Behind University of Ibadan, Ibadan. Oyo
-              State. Nigeria
+              State. Nigeria.
             </li>
             <li className="flex items-center gap-2">
               <FaPhoneAlt className="text-green-600" />

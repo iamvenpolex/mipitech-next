@@ -32,10 +32,7 @@ const projects = [
 
 export default function PortfolioSection() {
   return (
-    <section
-      className="bg-gradient-to-b from-white to-blue-50 py-20 px-6"
-      id="portfolio"
-    >
+    <section className="bg-white py-20 px-6" id="portfolio">
       <div className="max-w-7xl mx-auto">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
           <span className="text-blue-600">Portfolio</span> <br /> Some of Our

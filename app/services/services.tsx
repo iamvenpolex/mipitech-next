@@ -90,16 +90,16 @@ export default function Services() {
             transition={{ duration: 0.8 }}
             className="text-4xl md:text-6xl font-bold mb-4 capitalize"
           >
-            <span className="text-blue-500">MIPITECH</span> SERVICES
+            <span className="text-blue-400">MIPITECH</span> SERVICES
           </motion.h1>
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4, duration: 0.8 }}
-            className="mt-4 max-w-2xl mx-auto text-lg md:text-xl text-gray-200"
+            className="mt-4 max-w-2xl mx-auto text-lg md:text-2xl text-gray-200"
           >
-            Learn more about who we are, our mission, and how we deliver
-            innovative solutions to help your business thrive.
+            Learn More About Who We Are, Our Mission, And How We Deliver
+            Innovative Solutions To Help Your Business Thrive.
           </motion.p>
           <motion.div
             initial={{ opacity: 0 }}
@@ -109,7 +109,7 @@ export default function Services() {
           >
             <Link
               href="/contact"
-              className="inline-block px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-400 text-white font-semibold rounded-full shadow-lg hover:from-blue-700 hover:to-blue-500 transition-all duration-300"
+              className="inline-block px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-full shadow-lg  transition-all duration-300"
             >
               Get in Touch
             </Link>
@@ -133,7 +133,7 @@ export default function Services() {
       </section>
 
       {/* INTRO SECTION */}
-      <section className="bg-gradient-to-r from-blue-50 to-white py-16">
+      <section className="bg-blue-50 py-16">
         <div className="container mx-auto flex flex-col md:flex-row items-center gap-8 px-6">
           <motion.div
             className="md:w-1/2"
@@ -141,25 +141,22 @@ export default function Services() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">
+            <h1 className="text-4xl md:text-4xl font-bold mb-4">
               What We Can{" "}
-              <span className="relative text-blue-600">
-                Do for You
-                <span className="absolute left-0 -bottom-1 w-full h-1 bg-gradient-to-r from-blue-600 to-black rounded"></span>
-              </span>
+              <span className="relative text-blue-600">Do for You</span>
             </h1>
             <p className="text-gray-600 text-lg mb-6">
-              At <strong>Mipitech</strong>, we deliver high-performance digital
-              solutions that help businesses grow faster, reach more customers,
-              and achieve sustainable success.
+              At <strong className="text-blue-600">Mipitech</strong>, we deliver
+              high-performance digital solutions that help businesses grow
+              faster, reach more customers, and achieve sustainable success.
             </p>
-            <p className="text-gray-600 mb-6">
+            <p className="text-gray-600 text-lg mb-6">
               Whether you need a fast-loading website, mobile app, SEO strategy,
               or e-commerce store — we have the expertise to make it happen.
             </p>
             <Link
               href="/contact"
-              className="inline-block px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-400 text-white font-semibold rounded-full shadow-lg hover:from-blue-700 hover:to-blue-500 transition-all duration-300"
+              className="inline-block px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white  font-semibold rounded-lg shadow-lg  transition-all duration-300"
             >
               Let’s Work Together
             </Link>

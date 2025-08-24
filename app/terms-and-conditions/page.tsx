@@ -26,10 +26,7 @@ export default function TermsAndConditions() {
     <main className="max-w-5xl mx-auto px-6 py-12 text-gray-800">
       <div className="text-center mb-10">
         <h1 className="text-4xl font-bold">
-          Terms &{" "}
-          <span className="text-blue-600 underline decoration-blue-600">
-            Conditions
-          </span>
+          Terms & <span className="text-blue-600 ">Conditions</span>
         </h1>
         <p className="text-sm text-gray-500 mt-2">
           Effective Date: August 11, 2025
@@ -38,7 +35,7 @@ export default function TermsAndConditions() {
 
       {/* Intro */}
       <p className="mb-6 leading-relaxed">
-        Welcome to <strong className="text-black">Mipitech</strong>. By using
+        Welcome to <strong className="text-blue-600">Mipitech</strong>. By using
         our website{" "}
         <a
           href="https://mipitech.com.ng"
@@ -102,7 +99,8 @@ export default function TermsAndConditions() {
             support@mipitech.com.ng
           </a>
           <br />
-          <strong> Address:</strong> 123 Mipitech Street, Lagos, Nigeria
+          <strong> Address:</strong> 24, Red Block street, Behind University of
+          Ibadan, Ibadan. Oyo State. Nigeria.
         </p>
       </section>
     </main>

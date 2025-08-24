@@ -84,7 +84,7 @@ export default function HomePage() {
           >
             <Link
               href="/contact"
-              className="inline-block bg-gradient-to-r from-blue-600 to-blue-400 hover:from-blue-700 hover:to-blue-500 text-white px-6 py-3 rounded-full font-semibold transition duration-300"
+              className="inline-block bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-full font-semibold transition duration-300"
             >
               Get Started
             </Link>
@@ -106,19 +106,19 @@ export default function HomePage() {
       </section>
 
       {/* ===== ABOUT SECTION ===== */}
-      <section className="relative py-20 px-6 md:px-12 bg-gradient-to-r from-blue-50 via-white to-blue-50 animate-gradient">
+
+      <section className="relative py-20 px-6 md:px-12 bg-blue-50 animate-gradient ">
         <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
           <div className="fade-in">
             <h2 className="text-3xl font-bold">
               <span className="text-black">About</span>{" "}
-              <span className="text-blue-600 relative after:content-[''] after:block after:w-20 after:h-1 after:bg-gradient-to-r after:from-black after:to-blue-500 after:mt-1">
-                Mipitech
-              </span>
+              <span className="text-blue-600">Mipitech</span>
             </h2>
-            <p className="text-gray-600 mb-6 max-w-xl">
-              At Mipitech, we provide modern solutions for web design, mobile
-              apps, SEO, and digital growth. We help businesses thrive online
-              through tailored strategies and tech expertise.
+            <p className="text-gray-600 text-lg leading-relaxed mb-6 py-4">
+              At <strong className="text-blue-600">Mipitech</strong>, we provide
+              modern solutions for web design, mobile apps, SEO, and digital
+              growth. We help businesses thrive online through tailored
+              strategies and tech expertise.
             </p>
           </div>
 
@@ -175,7 +175,7 @@ export default function HomePage() {
         <div className="mt-10 text-center">
           <Link
             href="/about"
-            className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-md transition inline-block"
+            className="bg-blue-500 hover:bg-blue-600 text-white  px-6 py-3 rounded-md transition inline-block"
           >
             Learn More
           </Link>
@@ -188,10 +188,8 @@ export default function HomePage() {
       {/* ===== WHAT WE CAN DO FOR YOU SECTION ===== */}
       <section className="py-20 bg-white text-center fade-in">
         <h2 className="text-3xl font-bold mb-10">
-          <span className="text-blue-600 underline underline-offset-4">
-            What
-          </span>{" "}
-          We Can Do For You
+          What We Can{" "}
+          <span className="text-blue-600 inline-block">Do For You</span>
         </h2>
 
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 px-4 max-w-6xl mx-auto">
@@ -230,7 +228,7 @@ export default function HomePage() {
         <div className="mt-10 text-center">
           <Link
             href="/services"
-            className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-md transition inline-block"
+            className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-md transition inline-block"
           >
             Learn More
           </Link>

@@ -129,7 +129,7 @@ export default async function BlogPostPage({ params }: BlogPageProps) {
       name: "Mipitech",
       logo: {
         "@type": "ImageObject",
-        url: "/logo.png",
+        url: "/mipitech-logowithbg.jpg",
       },
     },
     datePublished: post.publishedAt ?? "",

@@ -58,13 +58,10 @@ export default function ClientTestimonials() {
   };
 
   return (
-    <section className="py-16 px-4 md:px-20 bg-gradient-to-br from-white via-sky-100 to-blue-100">
+    <section className="py-16 px-4 md:px-20 bg-blue-50">
       <div className="text-center mb-12">
         <h2 className="text-3xl md:text-4xl font-bold">
-          <span className="text-blue-500">What</span>{" "}
-          <span className="inline-block border-b-4 border-gradient-to-r from-blue-500 to-black">
-            Clients Say
-          </span>
+          What <span className="text-blue-600">Clients say</span>
         </h2>
         <p className="mt-4 text-gray-600 text-sm md:text-base">
           Hear from our happy clients across the globe.
@@ -101,7 +98,7 @@ export default function ClientTestimonials() {
             <motion.button
               whileTap={{ scale: 0.95 }}
               whileHover={{ scale: 1.05 }}
-              className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white text-sm rounded-full shadow-md transition-all duration-300 hover:bg-blue-700"
+              className="flex items-center gap-2 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white text-sm rounded-lg shadow-md transition-all duration-300 "
               onClick={handleNext}
             >
               Next <ArrowRight size={16} />

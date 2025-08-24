@@ -22,6 +22,7 @@ export default function ContactPage() {
     message: string;
   } | null>(null);
   const [showScroll, setShowScroll] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   // Scroll-to-top button handler
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
@@ -38,6 +39,9 @@ export default function ContactPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    setLoading(true);
+    setStatus(null);
+
     emailjs
       .send(
         "service_sx7je2p",
@@ -49,12 +53,14 @@ export default function ContactPage() {
         () => {
           setStatus({ success: true, message: "Message sent successfully!" });
           setForm({ name: "", email: "", message: "" });
+          setLoading(false);
         },
         () => {
           setStatus({
             success: false,
             message: "Failed to send message. Please try again.",
           });
+          setLoading(false);
         }
       );
   };
@@ -66,7 +72,7 @@ export default function ContactPage() {
         className="relative h-[40vh] flex items-center justify-center text-white bg-cover bg-center"
         style={{ backgroundImage: "url('/mipitech-contactbg.jpg')" }}
       >
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-blue-900/40"></div>
+        <div className="absolute inset-0 bg-black/50 z-10"></div>
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -77,7 +83,7 @@ export default function ContactPage() {
             initial={{ y: -20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.5 }}
-            className="text-4xl md:text-5xl font-extrabold tracking-wide"
+            className="text-4xl md:text-5xl z-10 font-extrabold tracking-wide"
           >
             CONTACT <span className="text-blue-400">MIPITECH</span>
           </motion.h1>
@@ -85,7 +91,7 @@ export default function ContactPage() {
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.7 }}
-            className="mt-3 text-lg md:text-xl text-gray-200"
+            className="max-w-2xl mx-auto text-xl md:text-2xl capitalize"
           >
             Get in Touch with Us
           </motion.p>
@@ -96,9 +102,7 @@ export default function ContactPage() {
       <section className="py-10 text-center">
         <h2 className="text-3xl font-bold">
           <span className="text-black">Get in </span>
-          <span className="text-blue-500 underline decoration-blue-500">
-            Touch
-          </span>
+          <span className="text-blue-600 ">Touch</span>
         </h2>
         <p className="mt-2 text-gray-700 max-w-xl mx-auto">
           Contact Mipitech - Best Web Designers in Nigeria via email, call or
@@ -146,9 +150,20 @@ export default function ContactPage() {
           )}
           <button
             type="submit"
-            className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg transition flex items-center gap-2"
+            disabled={loading}
+            className={`px-6 py-3 rounded-lg transition flex items-center gap-2 text-white ${
+              loading
+                ? "bg-blue-400 cursor-not-allowed"
+                : "bg-blue-500 hover:bg-blue-600"
+            }`}
           >
-            <Send size={18} /> Send Message
+            {loading ? (
+              "Sending..."
+            ) : (
+              <>
+                <Send size={18} /> Send Message
+              </>
+            )}
           </button>
         </form>
 

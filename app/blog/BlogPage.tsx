@@ -7,7 +7,18 @@ import Link from "next/link";
 import { client } from "@/sanity/lib/client";
 import imageUrlBuilder from "@sanity/image-url";
 import { motion } from "framer-motion";
+import NewsletterForm from "@/components/NewsletterForm";
+import Advertisement from "@/components/Advertisement";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
+import {
+  SiX,
+  SiFacebook,
+  SiLinkedin,
+  SiInstagram,
+  SiYoutube,
+  SiTiktok,
+  SiWhatsapp,
+} from "react-icons/si"; // ✅ import sidebar icons
 
 const builder = imageUrlBuilder(client);
 function urlFor(source: SanityImageSource) {
@@ -27,13 +38,13 @@ interface BlogPost {
 const categories = [
   "All",
   "Web Development",
+  "SEO",
   "Tech Tutorials",
   "For Beginners",
   "Tools & Resources",
 ];
 const sortOptions = ["Newest", "Oldest", "A–Z"];
 
-// ✅ Helper: truncate excerpt cleanly
 function truncateText(text: string, maxLength: number): string {
   if (!text) return "";
   if (text.length <= maxLength) return text;
@@ -42,7 +53,6 @@ function truncateText(text: string, maxLength: number): string {
   return (lastSpace > 0 ? truncated.slice(0, lastSpace) : truncated) + "…";
 }
 
-// ✅ Helper: highlight search term
 function highlightMatch(text: string, query: string) {
   if (!query) return text;
   const regex = new RegExp(`(${query})`, "gi");
@@ -191,9 +201,9 @@ export default function BlogPage() {
             className="object-cover brightness-75"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-blue-900/40"></div>
+          <div className="absolute inset-0 bg-black/50 z-10"></div>
         </motion.div>
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white px-4">
+        <div className="absolute inset-0 flex z-10 flex-col items-center justify-center text-center text-white px-4">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -208,75 +218,184 @@ export default function BlogPage() {
             transition={{ delay: 0.5, duration: 0.6 }}
             className="mt-3 text-lg md:text-xl max-w-2xl"
           >
-            Insights, tutorials, and resources for developers, designers, and
-            tech enthusiasts.
+            Insights, Tutorials, And Resources For Developers, Designers, And
+            Tech Enthusiasts.
           </motion.p>
         </div>
       </div>
 
-      {/* Blog Grid */}
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6 px-4 md:px-8">
-        {currentPosts.map((post) => (
-          <motion.div
-            key={post._id}
-            className="bg-white shadow-lg rounded-lg overflow-hidden flex flex-col hover:shadow-xl transition-shadow duration-300"
-            whileHover={{ y: -2 }}
-          >
-            {post.mainImage && (
-              <Image
-                src={urlFor(post.mainImage).width(600).url()}
-                alt={post.title}
-                width={600}
-                height={400}
-                className="object-cover w-full h-48"
-              />
-            )}
-            <div className="p-4 flex flex-col flex-grow">
-              <h2 className="text-lg font-bold mb-2">{post.title}</h2>
-              <p className="text-gray-600 text-sm flex-grow">
-                {highlightMatch(truncateText(post.excerpt, 200), search)}
-              </p>
-              <div className="mt-4 flex flex-wrap gap-2 text-sm text-gray-500 items-center">
-                <span className="flex items-center gap-1">
-                  <Calendar size={14} className="text-blue-600" />
-                  {new Date(post.publishedAt).toLocaleDateString(undefined, {
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                  })}
-                </span>
-                {post.categories.map((cat) => (
-                  <span key={cat.title} className="flex items-center gap-1">
-                    <Tag size={14} className="text-blue-600" /> {cat.title}
-                  </span>
-                ))}
-              </div>
-              <Link
-                href={`/blog/${post.slug.current}`}
-                className="mt-4 inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors text-center"
+      {/* Blog + Sidebar Layout */}
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 mt-6 px-4 md:px-8">
+        {/* Blog Grid */}
+        <div className="lg:col-span-3">
+          {/* ✅ 2 posts per row */}
+          <div className="grid sm:grid-cols-2 lg:grid-cols-2 gap-6">
+            {currentPosts.map((post) => (
+              <motion.div
+                key={post._id}
+                className="bg-white shadow-lg rounded-lg overflow-hidden flex flex-col hover:shadow-xl transition-shadow duration-300"
+                whileHover={{ y: -2 }}
               >
-                Read More →
-              </Link>
-            </div>
-          </motion.div>
-        ))}
-      </div>
+                {post.mainImage && (
+                  <Image
+                    src={urlFor(post.mainImage).width(600).url()}
+                    alt={post.title}
+                    width={600}
+                    height={400}
+                    className="object-cover w-full h-48"
+                  />
+                )}
+                <div className="p-4 flex flex-col flex-grow">
+                  <h2 className="text-lg font-bold mb-2">{post.title}</h2>
+                  <p className="text-gray-600 text-sm flex-grow">
+                    {highlightMatch(truncateText(post.excerpt, 200), search)}
+                  </p>
+                  <div className="mt-4 flex flex-wrap gap-2 text-sm text-gray-500 items-center">
+                    <span className="flex items-center gap-1">
+                      <Calendar size={14} className="text-blue-600" />
+                      {new Date(post.publishedAt).toLocaleDateString(
+                        undefined,
+                        {
+                          year: "numeric",
+                          month: "long",
+                          day: "numeric",
+                        }
+                      )}
+                    </span>
+                    {post.categories.map((cat) => (
+                      <span key={cat.title} className="flex items-center gap-1">
+                        <Tag size={14} className="text-blue-600" /> {cat.title}
+                      </span>
+                    ))}
+                  </div>
+                  <Link
+                    href={`/blog/${post.slug.current}`}
+                    className="mt-4 inline-block bg-blue-600 text-white w-35 px-4 py-2 rounded hover:bg-blue-700 transition-colors text-center"
+                  >
+                    Read More →
+                  </Link>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+          {/* Pagination */}
+          <div className="flex justify-center gap-2 mt-8 mb-12">
+            {Array.from({ length: totalPages }, (_, i) => (
+              <button
+                key={i}
+                onClick={() => setCurrentPage(i + 1)}
+                className={`px-3 py-1 rounded border transition ${
+                  currentPage === i + 1
+                    ? "bg-blue-600 text-white"
+                    : "bg-white hover:bg-gray-100"
+                }`}
+              >
+                {i + 1}
+              </button>
+            ))}
+          </div>
+        </div>
 
-      {/* Pagination */}
-      <div className="flex justify-center gap-2 mt-8 mb-12">
-        {Array.from({ length: totalPages }, (_, i) => (
-          <button
-            key={i}
-            onClick={() => setCurrentPage(i + 1)}
-            className={`px-3 py-1 rounded border transition ${
-              currentPage === i + 1
-                ? "bg-blue-600 text-white"
-                : "bg-white hover:bg-gray-100"
-            }`}
-          >
-            {i + 1}
-          </button>
-        ))}
+        {/* Sidebar */}
+        <aside className="space-y-8">
+          {/* Follow Us */}
+          <div className="p-6 bg-gray-100 rounded-xl shadow-sm text-center">
+            <h3 className="font-semibold text-lg mb-3">Follow Us</h3>
+            <div className="flex justify-center gap-4 flex-wrap">
+              <a href="https://x.com/mipitech" target="_blank" rel="noreferrer">
+                <SiX className="w-6 h-6 text-black hover:scale-110 transition" />
+              </a>
+              <a
+                href="https://facebook.com/mipitech"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <SiFacebook className="w-6 h-6 text-blue-700 hover:scale-110 transition" />
+              </a>
+              <a
+                href="https://linkedin.com/company/mipitech"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <SiLinkedin className="w-6 h-6 text-blue-600 hover:scale-110 transition" />
+              </a>
+              <a
+                href="https://instagram.com/mipitech_"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <SiInstagram className="w-6 h-6 text-pink-500 hover:scale-110 transition" />
+              </a>
+              <a
+                href="https://youtube.com/@mipitech"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <SiYoutube className="w-6 h-6 text-red-600 hover:scale-110 transition" />
+              </a>
+              <a
+                href="https://tiktok.com/@mipitech"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <SiTiktok className="w-6 h-6 text-black hover:scale-110 transition" />
+              </a>
+              <a
+                href="https://wa.me/2348032648367"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <SiWhatsapp className="w-6 h-6 text-green-500 hover:scale-110 transition" />
+              </a>
+            </div>
+          </div>
+
+          {/* Recent Posts */}
+          <div className="p-6 bg-gray-100 rounded-xl shadow-sm">
+            <h3 className="font-semibold text-lg mb-3">Recent Posts</h3>
+            <ul className="space-y-3">
+              {posts
+                .sort(
+                  (a, b) =>
+                    new Date(b.publishedAt).getTime() -
+                    new Date(a.publishedAt).getTime()
+                )
+                .slice(0, 3)
+                .map((recent) => (
+                  <li key={recent._id}>
+                    <Link
+                      href={`/blog/${recent.slug.current}`}
+                      className="flex items-center gap-3 hover:text-blue-600 transition"
+                    >
+                      {recent.mainImage && (
+                        <Image
+                          src={urlFor(recent.mainImage).width(100).url()}
+                          alt={recent.title}
+                          width={60}
+                          height={40}
+                          className="w-16 h-12 object-cover rounded"
+                        />
+                      )}
+                      <div>
+                        <p className="text-sm font-medium line-clamp-2">
+                          {recent.title}
+                        </p>
+                        <p className="text-xs text-gray-500">
+                          {new Date(recent.publishedAt).toLocaleDateString()}
+                        </p>
+                      </div>
+                    </Link>
+                  </li>
+                ))}
+            </ul>
+          </div>
+
+          {/* Newsletter */}
+          <NewsletterForm />
+
+          {/* Advertisement */}
+          <Advertisement />
+        </aside>
       </div>
     </div>
   );

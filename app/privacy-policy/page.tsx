@@ -26,10 +26,7 @@ export default function PrivacyPolicyPage() {
     <main className="max-w-5xl mx-auto px-6 py-12 text-gray-800">
       <div className="text-center mb-10">
         <h1 className="text-4xl font-bold">
-          Privacy{" "}
-          <span className="text-blue-600 underline decoration-blue-600">
-            Policy
-          </span>
+          Privacy <span className="text-blue-600 ">Policy</span>
         </h1>
         <p className="text-sm text-gray-500 mt-2">
           Effective Date: August 11, 2025
@@ -39,9 +36,9 @@ export default function PrivacyPolicyPage() {
       {/* Intro */}
       <p className="mb-6 leading-relaxed">
         This Privacy Policy describes how{" "}
-        <strong className="text-black">Mipitech</strong> (“we,” “our,” or “us”)
-        collects, uses, and protects your personal information when you visit or
-        interact with our website{" "}
+        <strong className="text-blue-600">Mipitech</strong> (“we,” “our,” or
+        “us”) collects, uses, and protects your personal information when you
+        visit or interact with our website{" "}
         <a
           href="https://mipitech.com.ng"
           className="text-blue-600 hover:underline"
@@ -106,7 +103,8 @@ export default function PrivacyPolicyPage() {
             support@mipitech.com.ng
           </a>
           <br />
-          <strong> Address:</strong> 123 Mipitech Street, Lagos, Nigeria
+          <strong> Address:</strong> 24, Red Block street, Behind University of
+          Ibadan, Ibadan. Oyo State. Nigeria.
         </p>
       </section>
     </main>

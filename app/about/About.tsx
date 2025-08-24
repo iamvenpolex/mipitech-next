@@ -53,16 +53,16 @@ export default function AboutHero() {
             transition={{ duration: 0.8 }}
             className="text-4xl md:text-6xl font-bold mb-4 capitalize"
           >
-            ABOUT <span className="text-blue-500">MIPITECH</span>
+            ABOUT <span className="text-blue-400">MIPITECH</span>
           </motion.h1>
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4, duration: 0.8 }}
-            className="mt-4 max-w-2xl mx-auto text-lg md:text-xl text-gray-200"
+            className="mt-4 max-w-2xl mx-auto text-lg md:text-2xl text-gray-200"
           >
-            Learn more about who we are, our mission, and how we deliver
-            innovative solutions to help your business thrive.
+            Learn More About Who We Are, Our Mission, And How We Deliver
+            Innovative Solutions To Help Your Business Thrive.
           </motion.p>
           <motion.div
             initial={{ opacity: 0 }}
@@ -72,7 +72,7 @@ export default function AboutHero() {
           >
             <Link
               href="/contact"
-              className="inline-block px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-400 text-white font-semibold rounded-full shadow-lg hover:from-blue-700 hover:to-blue-500 transition-all duration-300"
+              className="inline-block px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-full shadow-lg  transition-all duration-300"
             >
               Get in Touch
             </Link>
@@ -103,12 +103,10 @@ export default function AboutHero() {
               <Info className="text-blue-600 w-8 h-8" />
               <h2 className="text-3xl font-bold">
                 <span className="text-black">About</span>{" "}
-                <span className="text-blue-600 relative after:content-[''] after:block after:w-20 after:h-1 after:bg-gradient-to-r after:from-black after:to-blue-500 after:mt-1">
-                  Mipitech
-                </span>
+                <span className="text-blue-600 ">Mipitech</span>
               </h2>
             </div>
-            <p className="text-gray-600 leading-relaxed mb-6">
+            <p className="text-gray-600 text-lg leading-relaxed mb-6">
               At <span className="font-semibold text-blue-600">Mipitech</span>,
               we pride ourselves on being the{" "}
               <strong>leading web solutions provider in Nigeria</strong>. Our
@@ -116,7 +114,7 @@ export default function AboutHero() {
               building digital experiences that look stunning and perform
               flawlessly.
             </p>
-            <p className="text-gray-600 leading-relaxed mb-6">
+            <p className="text-gray-600 text-lg leading-relaxed mb-6">
               From concept to deployment, we focus on delivering excellence with
               every project. We blend modern design, fast performance, and smart
               marketing strategies to help our clients succeed in an
@@ -203,7 +201,7 @@ export default function AboutHero() {
       </section>
 
       {/* CTA SECTION */}
-      <section className="relative bg-gradient-to-r from-blue-600 to-blue-400 py-16 px-6 md:px-12 lg:px-20 text-center overflow-hidden">
+      <section className="relative bg-blue-600 py-16 px-6 md:px-12 lg:px-20 text-center overflow-hidden">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -220,13 +218,11 @@ export default function AboutHero() {
           </p>
           <Link
             href="/services"
-            className="inline-block px-8 py-3 bg-white text-blue-600 font-semibold rounded-full shadow-lg hover:bg-gray-100 transition-all duration-300"
+            className="inline-block px-8 py-3 bg-white text-blue-600 font-semibold rounded-lg shadow-lg hover:bg-gray-100 transition-all duration-300"
           >
             View Our Services
           </Link>
         </motion.div>
-
-        <div className="absolute top-0 left-0 w-full h-full bg-[url('/cta-bg-pattern.svg')] bg-cover opacity-10"></div>
       </section>
 
       {/* ===== TECHSTACK SECTION (Lazy Loaded) ===== */}

@@ -35,10 +35,7 @@ export default function TechStack() {
         transition={{ duration: 1 }}
       >
         <span className="text-black">Our</span>{" "}
-        <span className="text-blue-500 relative inline-block">
-          Tech Stack
-          <span className="absolute left-0 -bottom-1 w-full h-1 bg-gradient-to-r from-blue-500 to-black rounded"></span>
-        </span>
+        <span className="text-blue-600 relative inline-block">Tech Stack</span>
       </motion.h2>
 
       <motion.p
