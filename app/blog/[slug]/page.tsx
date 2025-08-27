@@ -23,7 +23,6 @@ interface PostDetail {
   excerpt?: string;
 }
 
-// ✅ Fix: params must be typed as Promise<{ slug: string }>
 interface BlogPageProps {
   params: Promise<{ slug: string }>;
 }
@@ -48,7 +47,9 @@ function extractExcerpt(body?: PortableTextBlock[], length = 150): string {
 // ✅ Static params for SSG
 export async function generateStaticParams() {
   const posts = await client.fetch<{ slug: string }[]>(
-    `*[_type == "post"]{ "slug": slug.current }`
+    `*[_type == "post" && defined(slug.current) && publishedAt < now()]{
+      "slug": slug.current
+    }`
   );
   return posts.map((post) => ({ slug: post.slug }));
 }
@@ -57,7 +58,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: BlogPageProps): Promise<Metadata> {
-  const { slug } = await params; // ✅ Await params here
+  const { slug } = await params;
   const post = await client.fetch<PostDetail | null>(postBySlugQuery, { slug });
 
   if (!post) {
@@ -66,9 +67,16 @@ export async function generateMetadata({
 
   const description = extractExcerpt(post.body);
 
+  // ✅ Dynamic keywords → categories + title
+  const keywords = [
+    post.title,
+    ...(post.categories?.map((c) => c.title) || []),
+  ];
+
   return {
     title: `${post.title} | Mipitech Blog`,
     description,
+    keywords,
     alternates: {
       canonical: `https://mipitech.com.ng/blog/${encodeURIComponent(
         slug.toLowerCase()
@@ -94,7 +102,7 @@ export async function generateMetadata({
 
 // ✅ Page component
 export default async function BlogPostPage({ params }: BlogPageProps) {
-  const { slug } = await params; // ✅ Await params here
+  const { slug } = await params;
 
   const post = await client.fetch<PostDetail | null>(postBySlugQuery, { slug });
 
@@ -110,6 +118,7 @@ export default async function BlogPostPage({ params }: BlogPageProps) {
 
   const description = extractExcerpt(post.body);
 
+  // ✅ BlogPosting schema
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
@@ -137,12 +146,43 @@ export default async function BlogPostPage({ params }: BlogPageProps) {
     description,
   };
 
+  // ✅ Breadcrumb schema
+  const breadcrumbLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: "https://mipitech.com.ng/",
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Blog",
+        item: "https://mipitech.com.ng/blog",
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: post.title,
+        item: `https://mipitech.com.ng/blog/${slug}`,
+      },
+    ],
+  };
+
   return (
     <>
       <Script
         id="blogpost-jsonld"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <Script
+        id="breadcrumb-jsonld"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
       />
       <SlugPage post={post} relatedPosts={relatedPosts} />
     </>

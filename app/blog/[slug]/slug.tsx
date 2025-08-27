@@ -157,10 +157,6 @@ export default function SlugPage({ post, relatedPosts }: SlugPageProps) {
   const wordsPerMinute = 200;
   const readingTime = Math.ceil(plainText.split(/\s+/).length / wordsPerMinute);
 
-  const paginatedPosts = relatedPosts
-    .filter((related) => related._id !== post._id) // ✅ exclude current
-    .slice((page - 1) * postsPerPage, page * postsPerPage);
-
   return (
     <main className="max-w-7xl mx-auto px-4 lg:px-8 py-10 grid lg:grid-cols-[3fr_1fr] gap-10">
       {/* Left Content */}
@@ -216,6 +212,7 @@ export default function SlugPage({ post, relatedPosts }: SlugPageProps) {
               day: "numeric",
             })}
           </div>
+
           <div className="flex items-center gap-1">
             <Clock size={16} className="text-blue-700" />
             {readingTime} min read
@@ -231,6 +228,9 @@ export default function SlugPage({ post, relatedPosts }: SlugPageProps) {
             </div>
           )}
         </div>
+
+        {/* Divider line before content */}
+        <hr className="border-t border-gray-300 my-8" />
 
         {/* Blog Content */}
         {post.body && (
@@ -410,9 +410,16 @@ export default function SlugPage({ post, relatedPosts }: SlugPageProps) {
                         {related.title}
                       </p>
                       <p className="text-xs text-gray-500">
-                        {new Date(
-                          related.publishedAt || ""
-                        ).toLocaleDateString()}
+                        {related.publishedAt
+                          ? new Date(related.publishedAt).toLocaleDateString(
+                              "en-US",
+                              {
+                                year: "numeric",
+                                month: "long",
+                                day: "numeric",
+                              }
+                            )
+                          : ""}
                       </p>
                     </div>
                   </Link>

@@ -12,6 +12,7 @@ export const metadata: Metadata = {
     "tools",
     "resources",
     "Mipitech blog",
+    "SEO experts in Nigeria",
   ],
   openGraph: {
     title: "Blog - Mipitech",
