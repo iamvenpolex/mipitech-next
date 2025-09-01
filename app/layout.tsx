@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
+import Script from "next/script"; // 👈 import Script
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://mipitech.com.ng"), // ✅ sets the base domain
+  metadataBase: new URL("https://mipitech.com.ng"),
   title: "MIPITECH - Best Website Designer in Nigeria",
   description:
     "MIPITECH is Nigeria’s leading web design, SEO, and app development company. We deliver high-quality, fast, and scalable digital solutions.",
@@ -24,7 +25,7 @@ export const metadata: Metadata = {
     siteName: "MIPITECH",
     images: [
       {
-        url: "/mipitech-logowithbg.jpg", // ✅ make sure this is in /public (1200x630 recommended)
+        url: "/mipitech-logowithbg.jpg",
         width: 1200,
         height: 630,
         alt: "MIPITECH Web Design Nigeria",
@@ -57,6 +58,21 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        {/* ✅ Google Analytics */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-T86LYK9DQG"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-T86LYK9DQG');
+          `}
+        </Script>
+      </head>
       <body className="antialiased bg-white text-gray-900">
         <Navbar />
         <main className="pt-16">{children}</main>
