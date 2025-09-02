@@ -49,6 +49,11 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://mipitech.com.ng",
   },
+
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({
