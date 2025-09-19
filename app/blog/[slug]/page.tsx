@@ -24,24 +24,33 @@ interface PostDetail {
 }
 
 interface BlogPageProps {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string }>; // 👈 updated: params is async
 }
 
+const siteUrl = "https://mipitech.com.ng";
+
+// ✅ Strongly typed excerpt extractor (no `any`)
 function extractExcerpt(body?: PortableTextBlock[], length = 150): string {
   if (!body?.length) return "Blog post on Mipitech";
 
-  const firstBlock = body.find(
-    (block): block is PortableTextBlock & { children: { text: string }[] } =>
-      "children" in block &&
-      Array.isArray((block as { children?: { text?: string }[] }).children)
-  );
+  for (const block of body) {
+    if (block._type === "block" && "children" in block) {
+      const children = block.children as {
+        _type: string;
+        text?: string;
+      }[];
 
-  const firstChild = (
-    firstBlock?.children as { text: string }[] | undefined
-  )?.[0];
-  const text = firstChild?.text ?? "";
+      const span = children.find(
+        (child) => child._type === "span" && typeof child.text === "string"
+      );
 
-  return text.slice(0, length) || "Blog post on Mipitech";
+      if (span?.text) {
+        return span.text.slice(0, length);
+      }
+    }
+  }
+
+  return "Blog post on Mipitech";
 }
 
 // ✅ Static params for SSG
@@ -55,54 +64,55 @@ export async function generateStaticParams() {
 }
 
 // ✅ Metadata
-export async function generateMetadata({
-  params,
-}: BlogPageProps): Promise<Metadata> {
-  const { slug } = await params;
+export async function generateMetadata(
+  props: BlogPageProps
+): Promise<Metadata> {
+  const params = await props.params; // 👈 await params
+  const { slug } = params;
+
   const post = await client.fetch<PostDetail | null>(postBySlugQuery, { slug });
 
   if (!post) {
     return { title: "Post not found | Mipitech Blog" };
   }
 
-  const description = extractExcerpt(post.body);
+  const description = post.excerpt || extractExcerpt(post.body);
 
-  // ✅ Dynamic keywords → categories + title
   const keywords = [
     post.title,
     ...(post.categories?.map((c) => c.title) || []),
   ];
+
+  const imageUrl =
+    post.mainImage?.asset?.url || `${siteUrl}/mipitech-logowithbg.jpg`;
 
   return {
     title: `${post.title} | Mipitech Blog`,
     description,
     keywords,
     alternates: {
-      canonical: `https://mipitech.com.ng/blog/${encodeURIComponent(
-        slug.toLowerCase()
-      )}`,
+      canonical: `${siteUrl}/blog/${encodeURIComponent(slug.toLowerCase())}`,
     },
     openGraph: {
       title: post.title,
       description,
-      images: post.mainImage?.asset?.url
-        ? [{ url: post.mainImage.asset.url }]
-        : [],
-      url: `https://mipitech.com.ng/blog/${slug}`,
+      images: [{ url: imageUrl }],
+      url: `${siteUrl}/blog/${slug}`,
       type: "article",
     },
     twitter: {
       card: "summary_large_image",
       title: post.title,
       description,
-      images: post.mainImage?.asset?.url ? [post.mainImage.asset.url] : [],
+      images: [imageUrl],
     },
   };
 }
 
 // ✅ Page component
-export default async function BlogPostPage({ params }: BlogPageProps) {
-  const { slug } = await params;
+export default async function BlogPostPage(props: BlogPageProps) {
+  const params = await props.params; // 👈 await params
+  const { slug } = params;
 
   const post = await client.fetch<PostDetail | null>(postBySlugQuery, { slug });
 
@@ -116,18 +126,21 @@ export default async function BlogPostPage({ params }: BlogPageProps) {
     categoryIds,
   });
 
-  const description = extractExcerpt(post.body);
+  const description = post.excerpt || extractExcerpt(post.body);
+
+  const imageUrl =
+    post.mainImage?.asset?.url || `${siteUrl}/mipitech-logowithbg.jpg`;
 
   // ✅ BlogPosting schema
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
     headline: post.title,
-    image: post.mainImage?.asset?.url ?? "",
-    url: `https://mipitech.com.ng/blog/${slug}`,
+    image: imageUrl,
+    url: `${siteUrl}/blog/${slug}`,
     mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": `https://mipitech.com.ng/blog/${slug}`,
+      "@id": `${siteUrl}/blog/${slug}`,
     },
     author: {
       "@type": "Person",
@@ -138,7 +151,7 @@ export default async function BlogPostPage({ params }: BlogPageProps) {
       name: "Mipitech",
       logo: {
         "@type": "ImageObject",
-        url: "/mipitech-logowithbg.jpg",
+        url: `${siteUrl}/mipitech-logowithbg.jpg`,
       },
     },
     datePublished: post.publishedAt ?? "",
@@ -155,19 +168,19 @@ export default async function BlogPostPage({ params }: BlogPageProps) {
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: "https://mipitech.com.ng/",
+        item: `${siteUrl}/`,
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "Blog",
-        item: "https://mipitech.com.ng/blog",
+        item: `${siteUrl}/blog`,
       },
       {
         "@type": "ListItem",
         position: 3,
         name: post.title,
-        item: `https://mipitech.com.ng/blog/${slug}`,
+        item: `${siteUrl}/blog/${slug}`,
       },
     ],
   };

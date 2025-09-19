@@ -137,6 +137,7 @@ export default function BlogPage() {
   return (
     <div className="px-0 md:px-0">
       {/* Sub-Navbar */}
+      {/* Sub-Navbar */}
       <div
         className="sticky z-30 border-b bg-white py-5 transition-all duration-300"
         style={{ top: `${navHeight}px` }}
@@ -162,28 +163,31 @@ export default function BlogPage() {
             ))}
           </div>
 
-          {/* Search */}
-          <div className="flex items-center border rounded-full px-3 py-1 w-full md:w-64">
-            <Search size={18} className="text-gray-500" />
-            <input
-              type="text"
-              placeholder="Search posts..."
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              className="outline-none px-2 w-full"
-            />
-          </div>
+          {/* Search + Sort */}
+          <div className="flex items-center gap-2 w-full md:w-auto">
+            {/* Search */}
+            <div className="flex items-center border rounded-full px-3 py-1 flex-grow md:flex-grow-0">
+              <Search size={18} className="text-gray-500" />
+              <input
+                type="text"
+                placeholder="Search posts..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                className="outline-none px-2 w-full"
+              />
+            </div>
 
-          {/* Sort */}
-          <select
-            value={sortOrder}
-            onChange={(e) => setSortOrder(e.target.value)}
-            className="border rounded px-3 py-1"
-          >
-            {sortOptions.map((opt) => (
-              <option key={opt}>{opt}</option>
-            ))}
-          </select>
+            {/* Sort */}
+            <select
+              value={sortOrder}
+              onChange={(e) => setSortOrder(e.target.value)}
+              className="border rounded px-3 py-1"
+            >
+              {sortOptions.map((opt) => (
+                <option key={opt}>{opt}</option>
+              ))}
+            </select>
+          </div>
         </div>
       </div>
 

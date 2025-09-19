@@ -125,7 +125,7 @@ const portableTextComponents: Partial<PortableTextReactComponents> = {
           href={href}
           target={blank ? "_blank" : "_self"}
           rel={blank ? "noopener noreferrer" : undefined}
-          className="text-blue-600 underline hover:text-blue-800 flex items-center gap-1"
+          className="text-blue-600 underline hover:text-blue-800 inline-flex items-center gap-1"
         >
           {children} {blank && <ExternalLink size={12} />}
         </a>
