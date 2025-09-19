@@ -145,23 +145,32 @@ export default function Navbar() {
             animate={{ x: 0 }}
             exit={{ x: "-100%" }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-y-0 left-0 w-64 bg-white z-50 shadow-lg p-6"
+            className="fixed inset-y-0 left-0 w-[80%] max-w-sm bg-white z-50 shadow-lg rounded-r-2xl overflow-hidden"
           >
-            <div className="flex justify-between items-center mb-6">
-              <h2 className="text-lg font-bold text-blue-600">Menu</h2>
-              <button onClick={() => setMobileMenuOpen(false)}>
+            {/* Header inside menu */}
+            <div className="flex justify-between items-center px-6 py-5 border-b border-gray-200">
+              <h2 className="text-xl font-bold text-blue-600">Menu</h2>
+              <button
+                onClick={() => setMobileMenuOpen(false)}
+                className="p-2 rounded-full hover:bg-gray-100 transition"
+              >
                 <X className="w-6 h-6 text-gray-800" />
               </button>
             </div>
 
-            <nav className="flex flex-col gap-7">
+            {/* ✅ Menu items */}
+            <nav className="flex flex-col divide-y divide-gray-100">
               {navLinks.map((link) =>
                 link.name === "Portfolio" ? (
                   <a
                     key={link.name}
                     href="#portfolio"
                     onClick={handlePortfolioClick}
-                    className="flex items-center gap-3 text-base text-gray-800 hover:text-blue-500"
+                    className={`flex items-center gap-3 px-6 py-4 text-base transition ${
+                      pathname === "/#portfolio"
+                        ? "bg-blue-50 text-blue-600 font-semibold"
+                        : "text-gray-800 hover:text-blue-500 hover:bg-gray-50"
+                    }`}
                   >
                     {link.icon}
                     {link.name}
@@ -171,10 +180,10 @@ export default function Navbar() {
                     key={link.name}
                     href={link.path}
                     onClick={() => setMobileMenuOpen(false)}
-                    className={`flex items-center gap-3 text-base ${
+                    className={`flex items-center gap-3 px-6 py-4 text-base transition ${
                       pathname === link.path
-                        ? "text-blue-600 font-bold"
-                        : "text-gray-800 hover:text-blue-500"
+                        ? "bg-blue-50 text-blue-600 font-semibold"
+                        : "text-gray-800 hover:text-blue-500 hover:bg-gray-50"
                     }`}
                   >
                     {link.icon}
