@@ -10,6 +10,7 @@ export const metadata: Metadata = {
     "Service Agreement",
     "Mipitech Legal",
   ],
+
   openGraph: {
     title: "Terms & Conditions - Mipitech",
     description:

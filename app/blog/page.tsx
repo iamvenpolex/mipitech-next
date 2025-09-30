@@ -20,6 +20,9 @@ export const metadata: Metadata = {
     type: "website",
     url: "https://mipitech.com.ng/blog",
   },
+  alternates: {
+    canonical: "https://mipitech.com.ng/blog", // ✅ Fix canonical
+  },
 };
 
 export default function Page() {

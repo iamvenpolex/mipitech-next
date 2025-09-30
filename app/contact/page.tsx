@@ -12,6 +12,9 @@ export const metadata: Metadata = {
     url: "https://mipitech.com.ng/contact",
     type: "website",
   },
+  alternates: {
+    canonical: "https://mipitech.com.ng/contact", // ✅ Add this
+  },
 };
 
 export default function ContactPage() {

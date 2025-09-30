@@ -5,6 +5,7 @@ import type { PortableTextBlock } from "@portabletext/types";
 import SlugPage from "./slug";
 import type { Metadata } from "next";
 import Script from "next/script";
+import { notFound } from "next/navigation";
 
 interface Category {
   _id: string;
@@ -24,12 +25,12 @@ interface PostDetail {
 }
 
 interface BlogPageProps {
-  params: Promise<{ slug: string }>; // 👈 updated: params is async
+  params: Promise<{ slug: string }>; // ✅ must be Promise here
 }
 
 const siteUrl = "https://mipitech.com.ng";
 
-// ✅ Strongly typed excerpt extractor (no `any`)
+// ✅ Strongly typed excerpt extractor
 function extractExcerpt(body?: PortableTextBlock[], length = 150): string {
   if (!body?.length) return "Blog post on Mipitech";
 
@@ -67,8 +68,7 @@ export async function generateStaticParams() {
 export async function generateMetadata(
   props: BlogPageProps
 ): Promise<Metadata> {
-  const params = await props.params; // 👈 await params
-  const { slug } = params;
+  const { slug } = await props.params; // 👈 await params
 
   const post = await client.fetch<PostDetail | null>(postBySlugQuery, { slug });
 
@@ -111,14 +111,11 @@ export async function generateMetadata(
 
 // ✅ Page component
 export default async function BlogPostPage(props: BlogPageProps) {
-  const params = await props.params; // 👈 await params
-  const { slug } = params;
+  const { slug } = await props.params; // 👈 await params
 
   const post = await client.fetch<PostDetail | null>(postBySlugQuery, { slug });
 
-  if (!post) {
-    return <p className="p-6 text-center text-gray-500">Post not found</p>;
-  }
+  if (!post) return notFound(); // ✅ show 404 page
 
   const categoryIds = post.categories?.map((c) => c._id) || [];
   const relatedPosts = await client.fetch<PostDetail[]>(relatedPostsQuery, {
