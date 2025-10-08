@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Script from "next/script"; // 👈 import Script
+import Script from "next/script";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -11,6 +11,7 @@ export const metadata: Metadata = {
     "MIPITECH is Nigeria’s leading web design, SEO, and app development company. We deliver high-quality, fast, and scalable digital solutions.",
   keywords: [
     "web design Nigeria",
+    "best web developers in Nigeria",
     "website development",
     "SEO services Nigeria",
     "app development",
@@ -49,7 +50,6 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://mipitech.com.ng",
   },
-
   icons: {
     icon: "/favicon.ico",
     shortcut: "/favicon.ico",
@@ -77,6 +77,13 @@ export default function RootLayout({
             gtag('config', 'G-T86LYK9DQG');
           `}
         </Script>
+
+        {/* ✅ Google AdSense Snippet */}
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8225791861413366"
+          crossOrigin="anonymous"
+        />
       </head>
       <body className="antialiased bg-white text-gray-900">
         <Navbar />
