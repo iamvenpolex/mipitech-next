@@ -78,12 +78,12 @@ export default function RootLayout({
           `}
         </Script>
 
-        {/* ✅ Google AdSense Snippet */}
-        <Script
+        {/* ✅ Google AdSense Script — directly in head for server-side detection */}
+        <script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8225791861413366"
           crossOrigin="anonymous"
-        />
+        ></script>
       </head>
       <body className="antialiased bg-white text-gray-900">
         <Navbar />
