@@ -14,19 +14,19 @@ const ads: Ad[] = [
   {
     href: "/contact",
     src: "/ads1.jpg",
-    alt: "Advertisement 1",
+    alt: "Banner 1",
   },
   {
     href: "/",
     src: "/ads2.jpg",
-    alt: "Advertisement 2",
+    alt: "Banner 2",
   },
 ];
 
 export default function Advertisement() {
   return (
     <div className="p-6 bg-gray-50 rounded-xl shadow-sm text-center">
-      <p className="text-gray-500 text-sm mb-3">Advertisement</p>
+      <p className="text-gray-500 text-sm mb-3">Featured Sponsors</p>
 
       <div className="flex flex-col gap-4">
         {ads.map((ad, index) => (
