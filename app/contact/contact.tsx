@@ -256,7 +256,7 @@ export default function ContactPage() {
             Web Design Company in Lagos
           </p>
           <a
-            href="/contact"
+            href="https://wa.me/2348032648367"
             className="mt-3 flex items-center gap-2 bg-blue-500 text-white px-4 py-2 rounded-lg font-bold tracking-wide hover:bg-blue-600 transition-colors duration-300"
           >
             <Send size={18} /> CONTACT US

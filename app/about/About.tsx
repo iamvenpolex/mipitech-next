@@ -80,23 +80,22 @@ export default function AboutHero() {
         </div>
 
         {/* Curved Shape */}
-        <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-[0] z-20">
+        <div className="absolute bottom-0 w-full overflow-hidden leading-none z-20">
           <svg
-            className="relative block w-full h-[100px]"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 1920 100"
+            viewBox="0 0 1200 150"
             preserveAspectRatio="none"
+            className="w-full h-24 md:h-32 animate-[wave_8s_linear_infinite]"
           >
             <path
+              d="M0,50 C150,150 350,-50 600,50 C850,150 1050,-50 1200,50 L1200,150 L0,150 Z"
               fill="#ffffff"
-              d="M0,0 C960,160 960,-60 1920,0 L1920,100 L0,100 Z"
-            ></path>
+            />
           </svg>
         </div>
       </section>
 
       {/* ABOUT US SECTION */}
-      <section className="bg-white py-16 px-6 md:px-12 lg:px-20">
+      <section className="bg-white  px-6 md:px-12 lg:px-20">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <div>
             <div className="flex items-center gap-3 mb-4">

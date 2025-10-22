@@ -13,6 +13,7 @@ export const metadata: Metadata = {
     "best website designers in Nigeria",
     "best web developer in Nigeria",
     "website designers Nigeria",
+    "best website designers in lagos",
   ],
   openGraph: {
     title: "About Mipitech | Best Web Design Company in Nigeria",

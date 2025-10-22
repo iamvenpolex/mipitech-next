@@ -6,6 +6,13 @@ import Image from "next/image";
 
 const projects = [
   {
+    title: "TapAm",
+    description: "VTU website with Paystack integration for wallet funding.",
+    image: "/TapAm.png",
+    tech: ["NextJs", "TailwindCSS", "NodeJs"],
+    live: "https://tapam.mipitech.com.ng/",
+  },
+  {
     title: "Polex Hotel",
     description:
       "Modern and responsive hotel booking website built with HTML, CSS and JavaScript.",

@@ -7,13 +7,13 @@ export const metadata: Metadata = {
   description:
     "Mipitech offers professional web design, SEO, e-commerce, and mobile app development services in Nigeria and globally. We create fast, mobile-friendly, and SEO-optimized solutions tailored to your business growth.",
   keywords: [
-    "web design Nigeria",
-    "SEO services Nigeria",
-    "e-commerce development",
+    "web design Nigeria in nigeria",
+    "SEO services Nigeria in nigeria",
+    "e-commerce development in nigeria",
     "mobile app development",
-    "branding and marketing",
-    "best web design company Nigeria",
-    "Next.js development Nigeria",
+    "branding and marketing in nigeria",
+    "best web design company in Nigeria",
+    "Next.js development in Nigeria",
   ],
   openGraph: {
     title: "Our Services | Mipitech - Web Design, SEO, and App Development",

@@ -91,6 +91,7 @@ export default function HomePage() {
           </motion.div>
         </div>
 
+        {/* Curved Shape */}
         <div className="absolute bottom-0 w-full overflow-hidden leading-none z-20">
           <svg
             viewBox="0 0 1200 150"
