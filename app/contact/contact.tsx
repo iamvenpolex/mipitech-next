@@ -34,7 +34,7 @@ export default function ContactPage() {
   }, []);
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => setForm({ ...form, [e.target.name]: e.target.value });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -47,7 +47,7 @@ export default function ContactPage() {
         "service_sx7je2p",
         "template_jl619zh",
         { name: form.name, email: form.email, title: form.message },
-        "zE80EUV7W9a19vWl0"
+        "zE80EUV7W9a19vWl0",
       )
       .then(
         () => {
@@ -61,7 +61,7 @@ export default function ContactPage() {
             message: "Failed to send message. Please try again.",
           });
           setLoading(false);
-        }
+        },
       );
   };
 
@@ -171,11 +171,11 @@ export default function ContactPage() {
         <div>
           <div className="space-y-4">
             <p className="flex items-center gap-3">
-              <MapPin size={20} className="text-blue-500" /> 24, Red Block
-              street, Behind University of Ibadan, Ibadan. Oyo State. Nigeria.
+              <MapPin size={20} className="text-blue-500" /> Ijapo Extension,
+              Akure, Ondo State, Nigeria.
             </p>
             <p className="flex items-center gap-3">
-              <Phone size={20} className="text-blue-500" /> +234 803 264 8367
+              <Phone size={20} className="text-blue-500" /> +234 708 371 8631
             </p>
             <p className="flex items-center gap-3">
               <Mail size={20} className="text-blue-500" />{" "}
@@ -201,7 +201,7 @@ export default function ContactPage() {
             Quick responses via WhatsApp
           </p>
           <a
-            href="https://wa.me/2348032648367"
+            href="https://wa.me/2347083718631"
             target="_blank"
             rel="noopener noreferrer"
             className="mt-3 flex items-center gap-2 bg-green-500 text-white px-4 py-2 rounded-lg font-bold tracking-wide hover:bg-green-600 transition-colors duration-300"
@@ -218,7 +218,7 @@ export default function ContactPage() {
             Book a consultation session
           </p>
           <a
-            href="https://wa.me/2348032648367"
+            href="https://wa.me/2347083718631"
             target="_blank"
             rel="noopener noreferrer"
             className="mt-3 flex items-center gap-2 bg-purple-500 text-white px-4 py-2 rounded-lg font-bold tracking-wide hover:bg-purple-600 transition-colors duration-300"
@@ -256,7 +256,7 @@ export default function ContactPage() {
             Web Design Company in Lagos
           </p>
           <a
-            href="https://wa.me/2348032648367"
+            href="https://wa.me/2347083718631"
             className="mt-3 flex items-center gap-2 bg-blue-500 text-white px-4 py-2 rounded-lg font-bold tracking-wide hover:bg-blue-600 transition-colors duration-300"
           >
             <Send size={18} /> CONTACT US
@@ -266,7 +266,7 @@ export default function ContactPage() {
 
       {/* ===== WhatsApp Floating Button ===== */}
       <Link
-        href="https://wa.me/2348032648367"
+        href="https://wa.me/2347083718631"
         target="_blank"
         className="fixed bottom-6 left-6 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg animate-bounce z-50"
       >

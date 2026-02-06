@@ -41,7 +41,7 @@ export default function Footer() {
     },
     {
       icon: <FaWhatsapp color="#25D366" />,
-      href: "https://wa.me/2348032648367",
+      href: "https://wa.me/2347083718631",
     },
     {
       icon: <FaYoutube color="#FF0000" />,
@@ -146,7 +146,7 @@ export default function Footer() {
                     <span className="block h-0.5 bg-blue-500 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300" />
                   </Link>
                 </li>
-              )
+              ),
             )}
           </ul>
         </div>
@@ -159,12 +159,11 @@ export default function Footer() {
           <ul className="space-y-2 text-sm">
             <li className="flex items-center gap-2">
               <FaMapMarkerAlt className="text-red-600" />
-              24, Red Block street, Behind University of Ibadan, Ibadan. Oyo
-              State. Nigeria
+              Ijapo Extension, Akure, Ondo State. Nigeria
             </li>
             <li className="flex items-center gap-2">
               <FaPhoneAlt className="text-green-600" />
-              +234 803 264 8367
+              +234 708 371 8631
             </li>
             <li className="flex items-center gap-2">
               <FaEnvelope className="text-yellow-600" />
@@ -242,7 +241,7 @@ export default function Footer() {
                       <span className="block h-0.5 bg-blue-500 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300" />
                     </Link>
                   </li>
-                )
+                ),
               )}
             </ul>
           </div>
@@ -256,12 +255,11 @@ export default function Footer() {
           <ul className="space-y-2 text-sm">
             <li className="flex items-center gap-2">
               <FaMapMarkerAlt className="text-red-600" />
-              24, Red Block street, Behind University of Ibadan, Ibadan. Oyo
-              State. Nigeria.
+              Ijapo Extension, Akure, Ondo State. Nigeria.
             </li>
             <li className="flex items-center gap-2">
               <FaPhoneAlt className="text-green-600" />
-              +234 803 264 8367
+              +234 708 371 8631
             </li>
             <li className="flex items-center gap-2">
               <FaEnvelope className="text-yellow-600" />
